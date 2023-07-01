@@ -36,7 +36,7 @@ variable "courses" {
 
 output "courses" {
   value = var.courses
-  value1 = var.courses[2]
+  value = var.courses[2]
 }
 
 
@@ -58,6 +58,6 @@ variable "course-details" {
 
 output "course-details" {
   value = var.course-details
-  value1 = var.course-details["devops"]
+  value = var.course-details["devops"]
 }
 
