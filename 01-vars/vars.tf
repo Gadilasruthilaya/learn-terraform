@@ -1,4 +1,4 @@
-varible "sample"{
+variable "sample"{
   default= " hello world"
 }
 
