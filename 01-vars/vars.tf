@@ -39,7 +39,10 @@ output "courses" {
   values = var.courses[2]
 }
 
+output "courses1" {
 
+  value = var.courses[2]
+}
 
 #map
 
