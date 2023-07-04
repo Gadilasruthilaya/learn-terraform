@@ -6,9 +6,10 @@ resource "aws_instance" "web" {
   tags = {
     Name = var.name
   }
-}
+
 
 provisioner "remote-exec" {
+
   connection {
     type     = "ssh"
     user     = "centos"
@@ -20,6 +21,7 @@ provisioner "remote-exec" {
     "sudo labauto ansible",
     "ansible-pull -i localhost, -U https://github.com/Gadilasruthilaya/roboshopshell-ansible main.yml -e role_name=${var.name} -e env=dev",
   ]
+}
 }
 
 resource "aws_route53_record" "dev-ns" {
@@ -43,7 +45,6 @@ resource "aws_security_group" "sg" {
 
 
   ingress {
-    description      = "ssh"
     from_port        = 0
     to_port          = 0
     protocol         = "-"
@@ -56,7 +57,6 @@ resource "aws_security_group" "sg" {
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
   }
 
 tags = {
