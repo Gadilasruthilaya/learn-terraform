@@ -16,14 +16,16 @@ data "aws_ami" "example" {
 }
 
 
-  connection {
-    type     = "ssh"
-    user     = "centos"
-    password = "DevOps321"
-    host     = self.public_ip
-  }
+
 
   provisioner "remote-exec" {
+    connection {
+      type     = "ssh"
+      user     = "centos"
+      password = "DevOps321"
+      host     = self.public_ip
+    }
+
     inline = [
       "sudo labauto ansible",
       "ansible-pull -i https://github.com/Gadilasruthilaya/roboshopshell-ansible.git main.yml=frontend.yml env=dev -e ansible_username= centos -e ansible_password=DevOps321 ",
