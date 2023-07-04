@@ -22,33 +22,6 @@ provisioner "remote-exec" {
   ]
 }
 
-
-resource "aws_security_group" "sg" {
-  name        = var.name
-  description = "Allow TLS inbound traffic"
-
-
-  ingress {
-    description      = "ssh"
-    from_port        = 0
-    to_port          = -1
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-
-  }
-
-  egress {
-    from_port        = 0
-    to_port          = -1
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-  }
-}
-  tags = {
-    Name = var.name
-  }
-
 resource "aws_route53_record" "dev-ns" {
   zone_id = "Z02630002CU3WENE8SD4L"
   name    = "${var.name}-dev"
@@ -58,10 +31,38 @@ resource "aws_route53_record" "dev-ns" {
 }
 
 data "aws_ami" "example" {
-owners           = ["973714476881"]
-most_recent      = true
-name_regex       = "Centos-8-DevOps-Practice"
+  owners           = ["973714476881"]
+  most_recent      = true
+  name_regex       = "Centos-8-DevOps-Practice"
 
+}
+
+resource "aws_security_group" "sg" {
+  name        = var.name
+  description = "Allow TLS inbound traffic"
+
+
+  ingress {
+    description      = "ssh"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-"
+    cidr_blocks      = ["0.0.0.0/0"]
+
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+}
+
+
+tags = {
+  Name = var.name
 }
 
 
