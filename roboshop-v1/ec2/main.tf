@@ -24,7 +24,7 @@ provisioner "remote-exec" {
 }
 }
 
-resource "aws_route53_record" "dev-ns" {
+resource "aws_route53_record" "www" {
   zone_id = "Z02630002CU3WENE8SD4L"
   name    = "${var.name}-dev"
   type    = "A"
