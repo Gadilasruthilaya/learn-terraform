@@ -8,15 +8,6 @@ resource "aws_instance" "web" {
   }
 }
 
-data "aws_ami" "example" {
-  owners           = ["973714476881"]
-  most_recent      = true
-  name_regex       = "Centos-8-DevOps-Practice"
-
-}
-
-
-
 
   provisioner "remote-exec" {
     connection {
@@ -28,7 +19,13 @@ data "aws_ami" "example" {
 
     inline = [
       "sudo labauto ansible",
-      "ansible-pull -i https://github.com/Gadilasruthilaya/roboshopshell-ansible.git main.yml=frontend.yml env=dev -e ansible_username= centos -e ansible_password=DevOps321 ",
+      "ansible-pull -i localhost, u https://github.com/Gadilasruthilaya/roboshopshell-ansible.git main.yml -e role_name=frontend.yml -e env=dev  ",
     ]
   }
 
+data "aws_ami" "example" {
+  owners           = ["973714476881"]
+  most_recent      = true
+  name_regex       = "Centos-8-DevOps-Practice"
+
+}
