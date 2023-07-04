@@ -1,13 +1,11 @@
 resource "aws_instance" "web" {
-  ami           = data.aws_ami.example.id
-  instance_type = "t2.micro"
+  ami                    = data.aws_ami.example.id
+  instance_type          = "t2.micro"
   vpc_security_group_ids = ["sg-0a3ac7c7cb8d81765"]
 
   tags = {
     Name = "Provisioner_sample"
   }
-}
-
 
   provisioner "remote-exec" {
     connection {
@@ -22,6 +20,8 @@ resource "aws_instance" "web" {
       "ansible-pull -i localhost, u https://github.com/Gadilasruthilaya/roboshopshell-ansible.git main.yml -e role_name=frontend.yml -e env=dev  ",
     ]
   }
+
+}
 
 data "aws_ami" "example" {
   owners           = ["973714476881"]
