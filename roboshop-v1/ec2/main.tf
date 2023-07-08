@@ -21,7 +21,7 @@ provisioner "remote-exec" {
 
   inline = [
     "sudo labauto ansible",
-    "ansible-pull -i localhost, -U https://github.com/Gadilasruthilaya/roboshopshell-ansible main.yml -e role_name=${var.name} -e env=dev",
+    "ansible-pull -i localhost, -U https://github.com/Gadilasruthilaya/roboshopshell-ansible main.yml -e role_name=${var.name} -e env=dev"
   ]
 }
 }
@@ -31,7 +31,7 @@ resource "aws_route53_record" "www" {
   zone_id = "Z02630002CU3WENE8SD4L"
   name    = "${var.name}-dev"
   type    = "A"
-  ttl     = "30"
+  ttl     = 30
   records = [aws_instance.web.private_ip]
 }
 
@@ -62,10 +62,10 @@ resource "aws_security_group" "sg" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
 
-tags = {
+ tags = {
   Name = var.name
-}
 
+}
 }
 
 
