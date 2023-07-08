@@ -11,9 +11,11 @@ output "class" {
 
 variable "instances" {
   default = ["frontend", "cart","catalogue"]
-  count = length(var.instances)
-}
 
+}
+output "count" {
+  value = length(var.instances)
+}
 # to print them you can iterate them also use element function as well
 #element function looks in the list with the given index and print the value.
 
