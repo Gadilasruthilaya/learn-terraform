@@ -1,7 +1,7 @@
 resource "aws_instance" "web" {
   ami           = data.aws_ami.example.id
   instance_type = "t3.micro"
-  security_group_id    = aws_security_group.sg.id
+  vpc_security_group_id= [aws_security_group.sg.id]
 
   tags = {
     Name = var.name
@@ -16,12 +16,13 @@ data "aws_ami" "example" {
 }
 
 resource "aws_security_group" "sg" {
-  name        = "sg"
+  name        = var.name
   description = "Allow all traffic"
 
 
+
   ingress {
-    description = "all traffic"
+    description = "ssh"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
