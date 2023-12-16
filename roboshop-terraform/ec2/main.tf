@@ -21,6 +21,14 @@ data "aws_ami" "example" {
 
 }
 
+resource "aws_route53_record" "www" {
+  zone_id = Z02630002CU3WENE8SD4L
+  name    = "${var.name}.-dev.devopspractice.store"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.web.private_ip]
+}
+
 resource "aws_security_group" "sg" {
   name        = var.name
   description = "Allow all traffic"
