@@ -22,7 +22,7 @@ data "aws_ami" "example" {
 }
 
 resource "aws_route53_record" "www" {
-  zone_id = ["Z02630002CU3WENE8SD4L"]
+  zone_id = "Z02630002CU3WENE8SD4L"
   name    = "${var.name}.-dev.devopspractice.store"
   type    = "A"
   ttl     = 30
