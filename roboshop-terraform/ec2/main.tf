@@ -19,7 +19,7 @@ resource "aws_instance" "web" {
   provisioner "remote-exec" {
     inline = [
       "sudo labauto ansible",
-      "ansible-pull -i localhost, -U https://github.com/Gadilasruthilaya/roboshopshell-ansible-v1 -e role_name= ${var.name} main.yml",
+      "ansible-pull -i localhost, -U https://github.com/Gadilasruthilaya/roboshopshell-ansible-v1.git main.yml -e role_name= ${var.name} ",
     ]
   }
 }
@@ -43,7 +43,7 @@ resource "aws_route53_record" "www" {
   name    = "${var.name}-dev.devopspractice.store"
   type    = "A"
   ttl     = 30
-  records = [aws_instance.web.private_ip]
+  records = aws_instance.web.private_ip
 }
 
 resource "aws_security_group" "sg" {
