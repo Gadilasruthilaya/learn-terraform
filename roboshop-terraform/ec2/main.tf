@@ -8,24 +8,7 @@ resource "aws_instance" "web" {
   tags = {
     Name = var.name
   }
-}
 
-provider "aws" {
-  region = "us-east-1"
-}
-
-data "aws_ami" "example" {
-  most_recent      = true
-  name_regex       = "Centos-8-DevOps-Practice"
-  owners           = ["973714476881"]
-
-}
-
-resource "aws_instance" "ansible" {
-  # ...
-
-  # Establishes connection to be used by all
-  # generic remote provisioners (i.e. file/remote-exec)
   connection {
     type     = "ssh"
     user     = "centos"
@@ -40,6 +23,19 @@ resource "aws_instance" "ansible" {
     ]
   }
 }
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+data "aws_ami" "example" {
+  most_recent      = true
+  name_regex       = "Centos-8-DevOps-Practice"
+  owners           = ["973714476881"]
+
+}
+
+
 
 
 resource "aws_route53_record" "www" {
