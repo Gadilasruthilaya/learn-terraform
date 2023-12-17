@@ -9,9 +9,7 @@ resource "aws_instance" "web" {
   tags = {
     Name = var.name
   }
-  provider "aws" {
-    region = "us-east-1"
-  }
+
 }
 
 
