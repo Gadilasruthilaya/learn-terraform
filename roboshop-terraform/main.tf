@@ -2,7 +2,7 @@ module "instances" {
   for_each = var.instances
   source = "./ec2"
   name = each.key
-  region = "us-east-1"
+
 }
 
 variable "instances" {
