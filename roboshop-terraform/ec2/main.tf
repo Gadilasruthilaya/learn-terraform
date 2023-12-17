@@ -2,12 +2,18 @@
 resource "aws_instance" "web" {
   ami                    = data.aws_ami.example.id
   instance_type          = "t3.micro"
-  region                 = "us-east-1"
   vpc_security_group_ids = [aws_security_group.sg.id]
+
+
 
   tags = {
     Name = var.name
   }
+
+}
+
+provider "aws" {
+  region = "us-east-1"
 }
   resource "null_resource" "ansible" {
     depends_on = [aws_instance.web, aws_route53_record.www]
