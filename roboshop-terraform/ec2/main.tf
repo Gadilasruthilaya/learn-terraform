@@ -9,6 +9,7 @@ resource "aws_instance" "web" {
     Name = var.name
   }
   provisioner "remote-exec" {
+    depends_on = [aws_instance.web,aws_route53_record.www]
   connection {
     type     = "ssh"
     user     = "centos"
@@ -19,7 +20,7 @@ resource "aws_instance" "web" {
 
     inline = [
       "sudo labauto ansible",
-      "ansible-pull -i localhost, -U https://github.com/Gadilasruthilaya/roboshopshell-ansible-v1.git main.yml -e role_name= ${var.name} ",
+      "ansible-pull -i localhost, -U https://github.com/Gadilasruthilaya/roboshopshell-ansible-v1.git main.yml -e role_name= ${var.name} -e env=dev ",
     ]
   }
 }
@@ -40,10 +41,6 @@ data "aws_ami" "example" {
   owners           = ["973714476881"]
 
 }
-
-
-
-
 
 
 resource "aws_security_group" "sg" {
