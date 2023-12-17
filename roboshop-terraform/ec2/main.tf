@@ -13,7 +13,7 @@ resource "aws_instance" "web" {
     type     = "ssh"
     user     = "centos"
     password = "DevOps321"
-    host     = aws_instance.web.public_ip
+    host     = self.public_ip
   }
 
 
@@ -29,7 +29,7 @@ provider "aws" {
 }
 resource "aws_route53_record" "www" {
   zone_id = "Z02630002CU3WENE8SD4L"
-  name    = "${var.name}-dev.devopspractice.store"
+  name    = "${var.name}-dev"
   type    = "A"
   ttl     = 30
   records = [aws_instance.web.private_ip]
