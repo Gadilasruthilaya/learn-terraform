@@ -8,7 +8,7 @@ resource "aws_instance" "web" {
   tags = {
     Name = var.name
   }
-
+}
   resource "null_resource" "ansible" {
     provisioner "remote-exec" {
       depends_on = [aws_instance.web, aws_route53_record.www]
@@ -26,7 +26,7 @@ resource "aws_instance" "web" {
       ]
     }
   }
-}
+
 provider "aws" {
   region = "us-east-1"
 }
