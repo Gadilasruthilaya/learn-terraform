@@ -9,8 +9,9 @@ resource "aws_instance" "web" {
   }
 }
   resource "null_resource" "ansible" {
+    depends_on = [aws_instance.web, aws_route53_record.www]
     provisioner "remote-exec" {
-      depends_on = [aws_instance.web, aws_route53_record.www]
+
       connection {
         type     = "ssh"
         user     = "centos"
