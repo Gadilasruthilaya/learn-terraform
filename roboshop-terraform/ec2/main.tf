@@ -1,5 +1,4 @@
 
-
 resource "aws_instance" "web" {
   ami                    = data.aws_ami.example.id
   instance_type          = "t3.micro"
@@ -27,9 +26,7 @@ resource "aws_instance" "web" {
     }
   }
 
-provider "aws" {
-  region = "us-east-1"
-}
+
 resource "aws_route53_record" "www" {
   zone_id = "Z02630002CU3WENE8SD4L"
   name    = "${var.name}-dev"
